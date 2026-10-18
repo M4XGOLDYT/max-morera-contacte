@@ -1,1 +1,82 @@
 
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#10131a">
+<title>Max Morera Santamaria | Contacte</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh; padding: 28px 16px;
+  display: grid; place-items: center;
+  background: #10131a; color: #f5f5f5;
+  font-family: system-ui, sans-serif;
+}
+.card {
+  width: 100%; max-width: 390px; padding: 32px 24px;
+  border: 1px solid #303541; border-radius: 24px;
+  background: #191e28; text-align: center;
+}
+.avatar {
+  width: 84px; height: 84px; margin: auto;
+  display: grid; place-items: center; border-radius: 50%;
+  background: #d9e5ff; color: #17233b;
+  font-size: 27px; font-weight: 750;
+}
+h1 { font-size: 25px; margin: 20px 0 6px; }
+p { color: #b9c0ce; line-height: 1.5; }
+a, button {
+  width: 100%; display: block; margin-top: 12px; padding: 14px;
+  border: 1px solid #414959; border-radius: 12px;
+  color: #fff; background: #252c39; text-decoration: none;
+  font: inherit; font-weight: 600; cursor: pointer;
+}
+.primary { background: #d9e5ff; color: #17233b; border-color: #d9e5ff; }
+.note { font-size: 12px; margin-top: 22px; }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="avatar">MM</div>
+  <h1>Max Morera Santamaria</h1>
+  <p>Encantat de connectar amb tu!</p>
+
+  <button class="primary" onclick="saveContact()">
+    + Desa el contacte
+  </button>
+
+  <a href="tel:+34641064192">Truca'm</a>
+  <a href="https://wa.me/34641064192">Contacta per WhatsApp</a>
+  <a href="mailto:mamosa235@gmail.com">Envia'm un correu</a>
+
+  <p class="note">Desa el meu contacte a la teva agenda.</p>
+</main>
+
+<script>
+function saveContact() {
+  const vcard = [
+    "BEGIN:VCARD",
+    "VERSION:3.0",
+    "N:Morera Santamaria;Max;;;",
+    "FN:Max Morera Santamaria",
+    "TEL;TYPE=CELL:+34641064192",
+    "EMAIL:mamosa235@gmail.com",
+    "END:VCARD"
+  ].join("\r\n") + "\r\n";
+
+  const blob = new Blob([vcard], {type: "text/vcard;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "Max-Morera-Santamaria.vcf";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+</script>
+</body>
+</html>
+
